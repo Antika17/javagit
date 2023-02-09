@@ -1,22 +1,30 @@
 package mispruebas;
 
-import java.io.IOException;
-import java.math.*;
 import java.util.Scanner;
-
+import java.io.IOException;
+import java.io.ObjectInputStream.*;
+import java.math.*;
 import mipoo.Empleado;
 
 public class EmpleadoPruebas {
 
-	final static int MAX_EMPLEADOS = 20;
+	static final int MAX_EMPLEADOS = 20;
 	static Empleado[] empleados = new Empleado[MAX_EMPLEADOS];
 	static int indice = 0;
 
 	public static void main(String[] args) throws IOException {
-		
+		leerEmpleados();
+//		numeroEmpleados();
 
+		if (numeroEmpleados() > 0) {
+			mostrarEmpleados();
+			empleadoQueMasCobra();
+		}
+	}
+
+	public static void leerEmpleados() throws IOException {
 		Scanner sc = new Scanner(System.in);
-		
+
 		String dni, nombre;
 		BigDecimal sueldoBase, horaExtra;
 		Integer horasExtras;
@@ -69,18 +77,35 @@ public class EmpleadoPruebas {
 			empleados[indice] = e; // se añade el empleado al array
 			indice++;
 
-			//System.out.print(e);
 		}
-		
+//		System.out.print(indice);
 
 	}
-	
-	
-		public static void mostar(){
-		
-			for(int i=0; i<indice; i++)
-			{System.out.println(empleados[i]);		}
-		
+
+	public static int numeroEmpleados() {
+		return indice;
+
 	}
+
+	public static void mostrarEmpleados() throws IOException {
+		System.out.print(indice);
+
+		for (int i = 0; i < indice; i++) {
+			System.out.println(empleados[i]);
+
+		}
+	}
+
+	public static Empleado empleadoQueMasCobra() {
+		Empleado mayor = empleados[0];
+		for (int i = 1; i < indice; i++) {
+			if (empleados[i].sueldoACobrar().doubleValue() > mayor.sueldoACobrar().doubleValue()) {
+				mayor = empleados[i];
+				System.out.println("el empleado que mas cobra es"+ mayor.getNombres());
+			}
+		}
+		return mayor;
+
+	}
+
 }
-

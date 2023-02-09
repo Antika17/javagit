@@ -17,6 +17,13 @@ public class Person {
 		this.ciudad = ciudad;
 		this.fechaNac = fechaNac;
 	}
+	
+	
+
+	public Person() {
+			}
+
+
 
 	public String getNombre() {
 		return nombre;

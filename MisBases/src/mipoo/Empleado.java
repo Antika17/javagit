@@ -26,12 +26,10 @@ public class Empleado {
 	}
 
 	public Empleado(String dni) {
-		// TODO Auto-generated constructor stub
-	}
+			}
 
 	public Empleado() {
-		// TODO Auto-generated constructor stub
-	}
+			}
 
 	public String getNif() {
 		return nif;
@@ -138,6 +136,7 @@ public class Empleado {
 		sb.append("\nNumero de hijos: ").append(numHijos);
 		sb.append("\nRetencion: ").append(calcularRetencion());
 		sb.append("\nSueldo a cobrar: ").append(sueldoACobrar());
+		sb.append("\n");
 
 		return sb.toString();
 
