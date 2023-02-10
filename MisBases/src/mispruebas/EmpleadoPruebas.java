@@ -1,10 +1,10 @@
 package mispruebas;
 
-import java.util.Scanner;
 import java.io.IOException;
-import java.io.ObjectInputStream.*;
+
 import java.math.*;
 import mipoo.Empleado;
+import java.util.Scanner;
 
 public class EmpleadoPruebas {
 
@@ -13,12 +13,18 @@ public class EmpleadoPruebas {
 	static int indice = 0;
 
 	public static void main(String[] args) throws IOException {
+		Empleado e;
 		leerEmpleados();
-//		numeroEmpleados();
 
 		if (numeroEmpleados() > 0) {
 			mostrarEmpleados();
 			empleadoQueMasCobra();
+			empleadoQueMasCobraPorHoraExtra();
+			//e = empleadoQueMasCobra();
+			//System.out.println("Empleado que mas cobra es: " + e.getNif());
+			//e = empleadoQueMenosCobra();
+			//System.out.println("Empleado que menos cobra es: " + e.getNif());
+
 		}
 	}
 
@@ -57,9 +63,8 @@ public class EmpleadoPruebas {
 			System.out.print("Número de hijos: ");
 			numeroHijos = sc.nextInt();
 			System.out.println("valor hora extra: ");
-
 			horaExtra = sc.nextBigDecimal();
-			System.out.println("\n");
+			// System.out.println("\n");
 
 			Empleado e;
 			e = new Empleado();
@@ -78,7 +83,7 @@ public class EmpleadoPruebas {
 			indice++;
 
 		}
-//		System.out.print(indice);
+
 
 	}
 
@@ -88,7 +93,8 @@ public class EmpleadoPruebas {
 	}
 
 	public static void mostrarEmpleados() throws IOException {
-		System.out.print(indice);
+		System.out.print("\nNumero de empleados: "+indice+"\n");
+		
 
 		for (int i = 0; i < indice; i++) {
 			System.out.println(empleados[i]);
@@ -101,11 +107,58 @@ public class EmpleadoPruebas {
 		for (int i = 1; i < indice; i++) {
 			if (empleados[i].sueldoACobrar().doubleValue() > mayor.sueldoACobrar().doubleValue()) {
 				mayor = empleados[i];
-				System.out.println("el empleado que mas cobra es"+ mayor.getNombres());
 			}
 		}
-		return mayor;
 
+		System.out.println("el empleado que mas cobra es: " + mayor.getNombres());
+		return mayor;
 	}
 
+	public static Empleado empleadoQueMenosCobra() {
+		Empleado menor = empleados[0];
+		for (int i = 1; i < indice; i++) {
+			if (empleados[i].sueldoACobrar().doubleValue() < menor.sueldoACobrar().doubleValue()) {
+				menor = empleados[i];
+			}
+
+		}
+		System.out.println("el empleado que menos cobra es: " + menor.getNombres());
+		return menor;
+	}
+	
+	public static Empleado empleadoQueMasCobraPorHoraExtra() {
+		Empleado mas=empleados[0];
+		for(int i=1; i<indice; i++) {
+			if(empleados[i].complemento().doubleValue()>mas.complemento().doubleValue()) {
+				mas = empleados[i];
+			}
+			System.out.println("el empleado que mas cobra por horas extras es: "+mas.getNombres());
+		}
+		
+		return mas;
+	}
+
+	public static Empleado empleadoQueMenosCobraPorHoraExtra() {
+		Empleado menos= empleados[0];
+		for(int i=1; i<indice; i++) {
+			if(empleados[1].complemento().doubleValue()<menos.complemento().doubleValue()) {
+				menos=empleados[i];
+			}
+			System.out.println("el empleado que menos cobra por horas extra es: "+menos.getNombres());
+		}
+		return menos;
+	}
+	
+	public static void mostrarEmpleadosPorSueldoDeMenorAMayor() {
+		Empleado menos=empleados[0];
+		for(int i=1; i<indice; i++) {
+			if(empleados[1].sueldoACobrar().doubleValue()<menos.sueldoACobrar().doubleValue()) {
+				menos=empleados[1];
+			}
+			System.out.println(empleados[i]);
+		}
+		
+		
+	}
+	
 }
